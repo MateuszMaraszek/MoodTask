@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Todo, Mood, DailyData } from '../types';
 import { loadTodos, saveTodos, loadMoods, saveMoods } from '../utils/localStorage';
-import { getTodayDate, formatDate, getPastWeekDates } from '../utils/dateUtils';
+import { getTodayDate, getPastWeekDates } from '../utils/dateUtils';
 
 interface AppContextType {
   todos: Todo[];
