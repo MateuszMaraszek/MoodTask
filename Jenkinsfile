@@ -53,14 +53,14 @@ pipeline {
         // }
 
         // Optional cleanup stage
-        stage('Cleanup') {
+        //stage('Cleanup') {
             // steps {
             //     script {
             //         sh "docker stop ${DOCKER_IMAGE}  true"
             //         sh "docker rm ${DOCKER_IMAGE}  true"
             //     }
             //}
-        }
+        // }
     }
 
     post {
