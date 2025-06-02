@@ -1,6 +1,10 @@
 pipeline {
     agent any
-
+    
+    parameters {
+        string(name: 'DEPLOY_ENV', defaultValue: 'development', description: 'Deployment Environment')
+    }
+    
     environment {
         NODE_ENV = 'development'
         DOCKER_IMAGE = 'my-vite-app'
