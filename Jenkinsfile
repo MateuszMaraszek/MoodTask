@@ -36,30 +36,30 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
-            steps {
-                script {
-                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                }
-            }
-        }
+        // stage('Docker Build') {
+        //     steps {
+        //         script {
+        //             sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+        //         }
+        //     }
+        // }
 
-        stage('Docker Run') {
-            steps {
-                script {
-                    sh "docker run -d -p 8080:80 --name ${DOCKER_IMAGE} ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                }
-            }
-        }
+        // stage('Docker Run') {
+        //     steps {
+        //         script {
+        //             sh "docker run -d -p 8080:80 --name ${DOCKER_IMAGE} ${DOCKER_IMAGE}:${DOCKER_TAG}"
+        //         }
+        //     }
+        // }
 
         // Optional cleanup stage
         stage('Cleanup') {
-            steps {
-                script {
-                    sh "docker stop ${DOCKER_IMAGE}  true"
-                    sh "docker rm ${DOCKER_IMAGE}  true"
-                }
-            }
+            // steps {
+            //     script {
+            //         sh "docker stop ${DOCKER_IMAGE}  true"
+            //         sh "docker rm ${DOCKER_IMAGE}  true"
+            //     }
+            //}
         }
     }
 
