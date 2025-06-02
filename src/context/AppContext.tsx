@@ -15,8 +15,6 @@ interface AppContextType {
   todosForDate: (date: string) => Todo[];
 }
 
-const AppContext = createContext<AppContextType | undefined>(undefined);
-
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {
