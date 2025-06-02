@@ -62,15 +62,33 @@ pipeline {
         // }
     }
 
-    post {
+    post {Add commentMore actions
         success {
-            echo 'Pipeline completed successfully.'
+            echo 'Pipeline zakończony sukcesem.'
+            emailext(
+                subject: "✅ Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """Wdrożenie do środowiska *${params.DEPLOY_ENV}* zakończone sukcesem.
+
+Build URL: ${env.BUILD_URL}
+                """,
+                to: "twoj_email@outlook.com"
+            )
         }
         failure {
-            echo 'Pipeline failed.'
+            echo 'Pipeline zakończony błędem.'
+            emailext(
+                subject: "❌ Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """Wystąpił błąd podczas wdrażania do środowiska *${params.DEPLOY_ENV}*.
+
+Sprawdź szczegóły: ${env.BUILD_URL}
+                """,
+                to: "p.sokolowski.092@studms.ug.edu.pl"
+            )
         }
         cleanup {
-            echo 'Cleaning up any resources if needed.'
+            echo 'Czyszczenie zasobów.'Add commentMore actions
         }
     }
+    
 }
+
