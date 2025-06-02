@@ -1,10 +1,6 @@
 pipeline {
     agent any
-    
-    parameters {
-        string(name: 'DEPLOY_ENV', defaultValue: 'development', description: 'Deployment Environment')
-    }
-    
+
     environment {
         NODE_ENV = 'development'
         DOCKER_IMAGE = 'my-vite-app'
@@ -29,10 +25,10 @@ pipeline {
         }
 
         stage('Lint') {
-    steps {
-        bat 'npx eslint "src/**/*.{ts,tsx}"'
-    }
-}
+            steps {
+                bat 'npx eslint "src/**/*.{ts,tsx}"'
+            }
+        }
 
         stage('Build') {
             steps {
@@ -66,14 +62,14 @@ pipeline {
         // }
     }
 
-    post {Add commentMore actions
+    post {
         success {
             echo 'Pipeline zakończony sukcesem.'
             emailext(
                 subject: "✅ Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """Wdrożenie do środowiska *${params.DEPLOY_ENV}* zakończone sukcesem.
+                body: """Wdrożenie do środowiska zakończone sukcesem.
 
-            Build URL: ${env.BUILD_URL}
+Build URL: ${env.BUILD_URL}
                 """,
                 to: "p.sokolowski.092@studms.ug.edu.pl"
             )
@@ -82,17 +78,15 @@ pipeline {
             echo 'Pipeline zakończony błędem.'
             emailext(
                 subject: "❌ Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """Wystąpił błąd podczas wdrażania do środowiska *${params.DEPLOY_ENV}*.
+                body: """Wystąpił błąd podczas wdrażania.
 
-                Sprawdź szczegóły: ${env.BUILD_URL}
+Sprawdź szczegóły: ${env.BUILD_URL}
                 """,
                 to: "p.sokolowski.092@studms.ug.edu.pl"
             )
         }
         cleanup {
-            echo 'Czyszczenie zasobów.'Add commentMore actions
+            echo 'Czyszczenie zasobów.'
         }
     }
-    
 }
-
