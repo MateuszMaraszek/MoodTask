@@ -25,10 +25,10 @@ pipeline {
         }
 
         stage('Lint') {
-            steps {
-                bat 'npx eslint . --ext .ts,.tsx'
-            }
-        }
+    steps {
+        bat 'npx eslint "src/**/*.{ts,tsx}"'
+    }
+}
 
         stage('Build') {
             steps {
